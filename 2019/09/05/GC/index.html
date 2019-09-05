@@ -21,20 +21,24 @@
 <p>就是通过在对象头中分配一个空间来保存该对象被引用的次数。如果该对象被引用则计数加1，如果该对象被删除引用则计数减1，当该对象引用计数为0时，该对象被回收。</p>
 <p>为什么引用计数算法没有被采用？</p>
 <p>先举一个例子吧</p>
-<p>publicclass ReferenceCountingGC {</p>
-<pre><code>public Object instance;
+<pre><code>publicclass ReferenceCountingGC {
 
-publicReferenceCountingGC(String name){}</code></pre><p>}</p>
-<p>publicstaticvoidtestGC(){</p>
-<pre><code>ReferenceCountingGC a =new ReferenceCountingGC(&amp;quot;objA&amp;quot;);
-ReferenceCountingGC b =new ReferenceCountingGC(&amp;quot;objB&amp;quot;);
+    public Object instance;
 
-a.instance = b;
-b.instance = a;
+    publicReferenceCountingGC(String name){}
+}
 
-a = null;
-b = null;</code></pre><p>}</p>
-<ol>
+publicstaticvoidtestGC(){
+
+    ReferenceCountingGC a =new ReferenceCountingGC(&amp;quot;objA&amp;quot;);
+    ReferenceCountingGC b =new ReferenceCountingGC(&amp;quot;objB&amp;quot;);
+
+    a.instance = b;
+    b.instance = a;
+
+    a = null;
+    b = null;
+}</code></pre><ol>
 <li>定义2个对象</li>
 <li>相互引用</li>
 <li>置空各自的声明引用</li>
